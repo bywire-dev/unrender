@@ -10,4 +10,15 @@ repository.workspace = true
 authors.workspace = true
 
 [dependencies]
+unrender = { workspace = true }
+unrender-eval = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
 anyhow = { workspace = true }
+walkdir = { workspace = true }
+# Network access lives here and nowhere else in the workspace -- CI's purity
+# check greps crates/unrender and crates/unrender-eval specifically and never
+# touches xtask, so this dependency cannot silently leak into the published
+# crate or the pure test suite.
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+sha2 = "0.10"
