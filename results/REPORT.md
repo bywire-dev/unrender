@@ -6,22 +6,22 @@ Token counts are real Claude token counts (`claude-opus-5`, via `POST /v1/messag
 
 | fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | toon | json | cheapest |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| legacy/bubbletea | none | 66% | - | - | - | - | - | - | - | - | - |
-| legacy/bubbletea-moved | none | 67% | - | - | - | - | - | - | - | - | - |
-| legacy/dialog | none | 71% | - | - | - | - | - | - | - | - | - |
-| legacy/dialog-moved | none | 71% | - | - | - | - | - | - | - | - | - |
-| legacy/ink | none | 80% | - | - | - | - | - | - | - | - | - |
-| legacy/ink-moved | none | 80% | - | - | - | - | - | - | - | - | - |
-| legacy/less | none | 76% | - | - | - | - | - | - | - | - | - |
-| legacy/man | none | 100% | - | - | - | - | - | - | - | - | - |
-| legacy/ptk | none | 47% | - | - | - | - | - | - | - | - | - |
-| legacy/ptk-moved | none | 47% | - | - | - | - | - | - | - | - | - |
-| legacy/ratatui | framework | 70% | 100% | 100% | 1.00 | - | - | - | - | - | - |
-| legacy/ratatui-moved | framework | 70% | 100% | 100% | 1.00 | - | - | - | - | - | - |
-| legacy/textual | framework | 67% | 100% | 100% | 1.00 | - | - | - | - | - | - |
-| legacy/textual-moved | framework | 67% | 100% | 100% | 1.00 | - | - | - | - | - | - |
-| legacy/top | none | 71% | - | - | - | - | - | - | - | - | - |
-| legacy/vim | none | 76% | - | - | - | - | - | - | - | - | - |
+| legacy/bubbletea | none | 66% | - | - | - | 1045 | 206 | 495 | 135 | 1682 | toon |
+| legacy/bubbletea-moved | none | 67% | - | - | - | 1043 | 204 | 493 | 133 | 1680 | toon |
+| legacy/dialog | none | 71% | - | - | - | 8000 | 533 | 270 | 84 | 939 | toon |
+| legacy/dialog-moved | none | 71% | - | - | - | 7998 | 533 | 273 | 77 | 942 | toon |
+| legacy/ink | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
+| legacy/ink-moved | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
+| legacy/less | none | 76% | - | - | - | 441 | 379 | 849 | 464 | 2236 | toon |
+| legacy/man | none | 100% | - | - | - | 97 | 81 | 118 | 94 | 226 | toon |
+| legacy/ptk | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
+| legacy/ptk-moved | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
+| legacy/ratatui | framework | 70% | 100% | 100% | 1.00 | 1078 | 575 | 750 | 232 | 2657 | toon |
+| legacy/ratatui-moved | framework | 70% | 100% | 100% | 1.00 | 1079 | 575 | 750 | 232 | 2657 | toon |
+| legacy/textual | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
+| legacy/textual-moved | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
+| legacy/top | none | 71% | - | - | - | 2148 | 1251 | 5039 | 1271 | 16388 | toon |
+| legacy/vim | none | 76% | - | - | - | 438 | 377 | 833 | 456 | 2185 | toon |
 
 ## Known limitations
 
@@ -32,4 +32,4 @@ Fixtures below 60% content preservation, named rather than left for someone to n
 
 ## Token efficiency
 
-No fixtures have both `toon` and `json` counted yet.
+TOON was cheapest on 16/16 fixtures where both were counted; JSON on 0/16. Not asserted in advance -- a tree's shape can flip which wins, and the numbers above are what actually happened, not a claim.
