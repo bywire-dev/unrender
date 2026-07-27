@@ -6,29 +6,29 @@ Token counts are real Claude token counts (`claude-opus-5`, via `POST /v1/messag
 
 | fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | toon | json | cheapest |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| legacy/bubbletea | none | 66% | - | - | - | 1045 | 206 | 495 | 135 | 1682 | toon |
-| legacy/bubbletea-moved | none | 67% | - | - | - | 1043 | 204 | 493 | 133 | 1680 | toon |
-| legacy/dialog | none | 71% | - | - | - | 8000 | 533 | 270 | 84 | 939 | toon |
-| legacy/dialog-moved | none | 71% | - | - | - | 7998 | 533 | 273 | 77 | 942 | toon |
-| legacy/ink | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
-| legacy/ink-moved | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
-| legacy/less | none | 76% | - | - | - | 441 | 379 | 849 | 464 | 2236 | toon |
-| legacy/man | none | 100% | - | - | - | 97 | 81 | 118 | 94 | 226 | toon |
-| legacy/ptk | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
-| legacy/ptk-moved | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
-| legacy/textual | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
-| legacy/textual-moved | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
-| legacy/top | none | 71% | - | - | - | 2148 | 1251 | 5039 | 1271 | 16388 | toon |
-| legacy/vim | none | 76% | - | - | - | 438 | 377 | 833 | 456 | 2185 | toon |
-| vendor/ratatui/default | framework | 70% | 100% | 100% | 1.00 | 848 | 575 | 750 | 232 | 2657 | toon |
-| vendor/ratatui/moved | framework | 70% | 100% | 100% | 1.00 | 849 | 575 | 750 | 232 | 2657 | toon |
+| [legacy/bubbletea](details/legacy-bubbletea.md) | none | 66% | - | - | - | 1045 | 206 | 495 | 135 | 1682 | toon |
+| [legacy/bubbletea-moved](details/legacy-bubbletea-moved.md) | none | 67% | - | - | - | 1043 | 204 | 493 | 133 | 1680 | toon |
+| [legacy/dialog](details/legacy-dialog.md) | none | 71% | - | - | - | 8000 | 533 | 270 | 84 | 939 | toon |
+| [legacy/dialog-moved](details/legacy-dialog-moved.md) | none | 71% | - | - | - | 7998 | 533 | 273 | 77 | 942 | toon |
+| [legacy/ink](details/legacy-ink.md) | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
+| [legacy/ink-moved](details/legacy-ink-moved.md) | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
+| [legacy/less](details/legacy-less.md) | none | 76% | - | - | - | 441 | 379 | 849 | 464 | 2236 | toon |
+| [legacy/man](details/legacy-man.md) | none | 100% | - | - | - | 97 | 81 | 118 | 94 | 226 | toon |
+| [legacy/ptk](details/legacy-ptk.md) | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
+| [legacy/ptk-moved](details/legacy-ptk-moved.md) | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
+| [legacy/textual](details/legacy-textual.md) | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
+| [legacy/textual-moved](details/legacy-textual-moved.md) | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
+| [legacy/top](details/legacy-top.md) | none | 71% | - | - | - | 2148 | 1251 | 5039 | 1271 | 16388 | toon |
+| [legacy/vim](details/legacy-vim.md) | none | 76% | - | - | - | 438 | 377 | 833 | 456 | 2185 | toon |
+| [vendor/ratatui/default](details/vendor-ratatui-default.md) | framework | 70% | 100% | 100% | 1.00 | 848 | 575 | 750 | 232 | 2657 | toon |
+| [vendor/ratatui/moved](details/vendor-ratatui-moved.md) | framework | 70% | 100% | 100% | 1.00 | 849 | 575 | 750 | 232 | 2657 | toon |
 
 ## Known limitations
 
 Fixtures below 60% content preservation, named rather than left for someone to notice by scrolling the table:
 
-- **legacy/ptk** — 47% content preservation. See `results/details/legacy-ptk.md`.
-- **legacy/ptk-moved** — 47% content preservation. See `results/details/legacy-ptk-moved.md`.
+- **legacy/ptk** — 47% content preservation. See [details/legacy-ptk.md](details/legacy-ptk.md).
+- **legacy/ptk-moved** — 47% content preservation. See [details/legacy-ptk-moved.md](details/legacy-ptk-moved.md).
 
 ## Token efficiency
 

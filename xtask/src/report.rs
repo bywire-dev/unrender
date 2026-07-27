@@ -152,8 +152,9 @@ pub fn run(root: &Path) -> Result<()> {
 
         writeln!(
             report,
-            "| {} | {} | {:.0}% | {} | {} | {} | {} | {} | {} | {} | {} | {} |",
+            "| [{}](details/{}.md) | {} | {:.0}% | {} | {} | {} | {} | {} | {} | {} | {} | {} |",
             f.name,
+            f.name.replace('/', "-"),
             truth_source,
             fid.content_match * 100.0,
             recall
@@ -182,9 +183,10 @@ pub fn run(root: &Path) -> Result<()> {
 
         if fid.content_match < LIMITATION_THRESHOLD {
             limitations.push(format!(
-                "- **{}** — {:.0}% content preservation. See `results/details/{}.md`.",
+                "- **{}** — {:.0}% content preservation. See [details/{}.md](details/{}.md).",
                 f.name,
                 fid.content_match * 100.0,
+                f.name.replace('/', "-"),
                 f.name.replace('/', "-")
             ));
         }
