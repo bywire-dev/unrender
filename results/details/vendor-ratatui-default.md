@@ -1,4 +1,4 @@
-# legacy/ratatui-moved
+# vendor/ratatui/default
 
 [← back to REPORT.md](../REPORT.md)
 
@@ -16,9 +16,9 @@ structural: recall 100%, role agreement 100%, mean IoU 1.00
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ┌services──────────────────────────────────────────────────┐┌events────────────────────────────────┐
 │  SERVICE          STATE      P99                         ││deploy started                        │
-│  api-gateway      running    12ms                        ││image pulled                          │
+│> api-gateway      running    12ms                        ││image pulled                          │
 │  auth-service     running    31ms                        ││health check ok                       │
-│> billing          degraded   412ms                       ││traffic shifted 10%                   │
+│  billing          degraded   412ms                       ││traffic shifted 10%                   │
 │  search-index     running    88ms                        ││traffic shifted 50%                   │
 │  mailer           stopped    -                           ││                                      │
 │  scheduler        running    5ms                         ││                                      │
@@ -55,8 +55,8 @@ application @0,0,100,30
         cell @3,4,12,1 SERVICE
         cell @20,4,8,1 STATE
         cell @31,4,5,1 P99
-      row @1,5,58,1
-        cell @1,5,1,1
+      row [selected] @1,5,58,1
+        cell @1,5,1,1 >
         cell @3,5,12,1 api-gateway
         cell @20,5,8,1 running
         cell @31,5,5,1 12ms
@@ -65,8 +65,8 @@ application @0,0,100,30
         cell @3,6,12,1 auth-service
         cell @20,6,8,1 running
         cell @31,6,5,1 31ms
-      row [selected] @1,7,58,1
-        cell @1,7,1,1 >
+      row @1,7,58,1
+        cell @1,7,1,1
         cell @3,7,12,1 billing
         cell @20,7,8,1 degraded
         cell @31,7,5,1 412ms
@@ -102,9 +102,9 @@ application
   text zellij-spike: Deploy Console  ::  cluster prod-eu-1
   panel services events
     table services[6]{,SERVICE,STATE,P99}:
-       ,api-gateway,running,12ms
+      *>,api-gateway,running,12ms
        ,auth-service,running,31ms
-      *>,billing,degraded,412ms
+       ,billing,degraded,412ms
        ,search-index,running,88ms
        ,mailer,stopped,-
        ,scheduler,running,5ms
@@ -219,9 +219,13 @@ application
                 58,
                 1
               ],
+              "states": [
+                "selected"
+              ],
               "children": [
                 {
                   "role": "cell",
+                  "value": ">",
                   "rect": [
                     1,
                     5,
@@ -319,13 +323,9 @@ application
                 58,
                 1
               ],
-              "states": [
-                "selected"
-              ],
               "children": [
                 {
                   "role": "cell",
-                  "value": ">",
                   "rect": [
                     1,
                     7,

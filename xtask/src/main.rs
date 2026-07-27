@@ -7,19 +7,22 @@
 
 mod report;
 mod tokens;
+mod vendor;
 
 fn main() -> anyhow::Result<()> {
     let root = unrender_eval::workspace_root();
-    let cmd = std::env::args().nth(1);
+    let mut args = std::env::args().skip(1);
+    let cmd = args.next();
     match cmd.as_deref() {
         Some("report") => report::run(&root),
+        Some("vendor") => vendor::run(&root, args.next().as_deref()),
         Some(other) => {
             eprintln!("unknown subcommand: {other}");
-            eprintln!("usage: xtask report");
+            eprintln!("usage: xtask report | xtask vendor <framework>");
             std::process::exit(2);
         }
         None => {
-            eprintln!("usage: xtask report");
+            eprintln!("usage: xtask report | xtask vendor <framework>");
             std::process::exit(2);
         }
     }

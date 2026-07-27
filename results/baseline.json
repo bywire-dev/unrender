@@ -1,20 +1,6 @@
 {
-  "note": "Recorded metrics for truth-bearing fixtures. Entries with selection_ok=false are KNOWN FAILURES, recorded deliberately so that fixing them registers as a visible improvement rather than a silently-greening check.",
+  "note": "Recorded metrics. Entries with selection_ok=false are KNOWN FAILURES, recorded deliberately so that fixing them registers as a visible improvement rather than a silently-greening check.",
   "fixtures": {
-    "legacy/ratatui": {
-      "recall": 1.0,
-      "precision": 0.8571428571428571,
-      "role_agreement": 1.0,
-      "mean_iou": 1.0,
-      "selection_ok": true
-    },
-    "legacy/ratatui-moved": {
-      "recall": 1.0,
-      "precision": 0.8571428571428571,
-      "role_agreement": 1.0,
-      "mean_iou": 1.0,
-      "selection_ok": true
-    },
     "legacy/textual": {
       "recall": 1.0,
       "precision": 0.8333333333333334,
@@ -28,6 +14,20 @@
       "role_agreement": 1.0,
       "mean_iou": 1.0,
       "selection_ok": false
+    },
+    "vendor/ratatui/default": {
+      "recall": 1.0,
+      "precision": 0.8571428571428571,
+      "role_agreement": 1.0,
+      "mean_iou": 1.0,
+      "selection_ok": true
+    },
+    "vendor/ratatui/moved": {
+      "recall": 1.0,
+      "precision": 0.8571428571428571,
+      "role_agreement": 1.0,
+      "mean_iou": 1.0,
+      "selection_ok": true
     }
   },
   "fidelity": {
@@ -41,11 +41,11 @@
     "legacy/man": 1.0,
     "legacy/ptk": 0.47115384615384615,
     "legacy/ptk-moved": 0.47115384615384615,
-    "legacy/ratatui": 0.7013422818791947,
-    "legacy/ratatui-moved": 0.7013422818791947,
     "legacy/textual": 0.6652360515021459,
     "legacy/textual-moved": 0.6652360515021459,
     "legacy/top": 0.7070401211203634,
-    "legacy/vim": 0.7553191489361702
+    "legacy/vim": 0.7553191489361702,
+    "vendor/ratatui/default": 0.7013422818791947,
+    "vendor/ratatui/moved": 0.7013422818791947
   }
 }

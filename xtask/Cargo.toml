@@ -22,3 +22,6 @@ walkdir = { workspace = true }
 # crate or the pure test suite.
 reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
 sha2 = "0.10"
+# Vendor fixture generation: TestBackend renders widgets offline, no live
+# terminal or zellij needed for frameworks that ship their own layout engine.
+ratatui = "0.30"

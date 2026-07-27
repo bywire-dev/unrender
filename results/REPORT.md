@@ -16,12 +16,12 @@ Token counts are real Claude token counts (`claude-opus-5`, via `POST /v1/messag
 | legacy/man | none | 100% | - | - | - | 97 | 81 | 118 | 94 | 226 | toon |
 | legacy/ptk | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
 | legacy/ptk-moved | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
-| legacy/ratatui | framework | 70% | 100% | 100% | 1.00 | 1078 | 575 | 750 | 232 | 2657 | toon |
-| legacy/ratatui-moved | framework | 70% | 100% | 100% | 1.00 | 1079 | 575 | 750 | 232 | 2657 | toon |
 | legacy/textual | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
 | legacy/textual-moved | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
 | legacy/top | none | 71% | - | - | - | 2148 | 1251 | 5039 | 1271 | 16388 | toon |
 | legacy/vim | none | 76% | - | - | - | 438 | 377 | 833 | 456 | 2185 | toon |
+| vendor/ratatui/default | framework | 70% | 100% | 100% | 1.00 | 848 | 575 | 750 | 232 | 2657 | toon |
+| vendor/ratatui/moved | framework | 70% | 100% | 100% | 1.00 | 849 | 575 | 750 | 232 | 2657 | toon |
 
 ## Known limitations
 
