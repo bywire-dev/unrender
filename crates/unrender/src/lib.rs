@@ -34,7 +34,9 @@ fn build_frame_tree(g: &Grid, frames: &[BoxFrame]) -> Vec<Node> {
 
     fn make(g: &Grid, frames: &[BoxFrame], parent: &[Option<usize>], i: usize) -> Node {
         let f = &frames[i];
-        let kids: Vec<usize> = (0..frames.len()).filter(|&j| parent[j] == Some(i)).collect();
+        let kids: Vec<usize> = (0..frames.len())
+            .filter(|&j| parent[j] == Some(i))
+            .collect();
         let mut node = Node::new("panel", f.rect).named(f.title.clone());
         if kids.is_empty() {
             if let Some(inner) = f.rect.interior() {
@@ -106,7 +108,12 @@ pub fn build_tree(bytes: &[u8]) -> Node {
     let painted = regions::find_painted(&g);
 
     for (y0, y1) in uncovered_bands(&g, &roots) {
-        let area = Rect { x: 0, y: y0, w: g.w, h: y1 - y0 + 1 };
+        let area = Rect {
+            x: 0,
+            y: y0,
+            w: g.w,
+            h: y1 - y0 + 1,
+        };
         let bar = painted
             .iter()
             .any(|p| regions::is_bar(&g, &p.rect) && p.rect.y <= y1 && p.rect.y1() >= y0);
@@ -124,7 +131,15 @@ pub fn build_tree(bytes: &[u8]) -> Node {
     }
     roots.sort_by_key(|n| (n.rect[1], n.rect[0]));
 
-    let mut root = Node::new("application", Rect { x: 0, y: 0, w: g.w, h: g.h });
+    let mut root = Node::new(
+        "application",
+        Rect {
+            x: 0,
+            y: 0,
+            w: g.w,
+            h: g.h,
+        },
+    );
     root.children = roots;
     root
 }

@@ -51,7 +51,10 @@ fn marker_selected(text: &str) -> bool {
     if ON.iter().any(|m| t.starts_with(m)) {
         return true;
     }
-    matches!(t.chars().next(), Some('>' | '▶' | '▸' | '→' | '●' | '◉' | '✓'))
+    matches!(
+        t.chars().next(),
+        Some('>' | '▶' | '▸' | '→' | '●' | '◉' | '✓')
+    )
 }
 
 fn rows_of(g: &Grid, area: Rect, base: PaintKey) -> Vec<RowInfo> {
@@ -227,8 +230,16 @@ fn try_tree(g: &Grid, area: Rect, rows: &[&RowInfo]) -> Option<Node> {
             continue;
         }
         let (label, expanded) = strip_expander(label);
-        let mut item = Node::new("treeitem", Rect { x: area.x, y: r.y, w: area.w, h: 1 })
-            .valued(label);
+        let mut item = Node::new(
+            "treeitem",
+            Rect {
+                x: area.x,
+                y: r.y,
+                w: area.w,
+                h: 1,
+            },
+        )
+        .valued(label);
         item.states.push(format!("depth={depth}"));
         if expanded {
             item.states.push("expanded".into());
@@ -286,24 +297,43 @@ fn try_table(g: &Grid, area: Rect, rows: &[&RowInfo]) -> Option<Node> {
     // is styled unlike the rest because it is *selected*. A menu whose first
     // entry is highlighted would otherwise lose that entry into a phantom
     // header row.
-    let header_idx = if rows.len() > 2
-        && style_differs(g, area, rows[0].y, rows[1].y)
-        && !rows[0].painted
-    {
-        Some(0)
-    } else {
-        None
-    };
+    let header_idx =
+        if rows.len() > 2 && style_differs(g, area, rows[0].y, rows[1].y) && !rows[0].painted {
+            Some(0)
+        } else {
+            None
+        };
 
     for (i, r) in rows.iter().enumerate() {
-        let role = if Some(i) == header_idx { "rowheader" } else { "row" };
-        let mut row_node = Node::new(role, Rect { x: area.x, y: r.y, w: area.w, h: 1 });
+        let role = if Some(i) == header_idx {
+            "rowheader"
+        } else {
+            "row"
+        };
+        let mut row_node = Node::new(
+            role,
+            Rect {
+                x: area.x,
+                y: r.y,
+                w: area.w,
+                h: 1,
+            },
+        );
         for (a, b) in &spans {
             let x0 = area.x + *a as u16;
             let x1 = area.x + *b as u16;
             let text = g.row_text(r.y, x0, x1).trim().to_string();
             row_node.children.push(
-                Node::new("cell", Rect { x: x0, y: r.y, w: x1 - x0 + 1, h: 1 }).valued(text),
+                Node::new(
+                    "cell",
+                    Rect {
+                        x: x0,
+                        y: r.y,
+                        w: x1 - x0 + 1,
+                        h: 1,
+                    },
+                )
+                .valued(text),
             );
         }
         // The header is off-base by definition -- that is how it was found --
@@ -336,9 +366,17 @@ fn try_keyvalue(_g: &Grid, area: Rect, rows: &[&RowInfo]) -> Option<Node> {
     let mut node = Node::new("list", area).named(Some("properties".into()));
     for (y, k, v) in pairs {
         node.children.push(
-            Node::new("property", Rect { x: area.x, y, w: area.w, h: 1 })
-                .named(Some(k))
-                .valued(v),
+            Node::new(
+                "property",
+                Rect {
+                    x: area.x,
+                    y,
+                    w: area.w,
+                    h: 1,
+                },
+            )
+            .named(Some(k))
+            .valued(v),
         );
     }
     Some(node)
@@ -355,7 +393,7 @@ fn try_list(_g: &Grid, area: Rect, rows: &[&RowInfo]) -> Option<Node> {
             let c = t.chars().next().unwrap_or(' ');
             BULLETS.contains(&c)
                 || EXPANDERS.contains(&c)
-                || t.chars().next().map_or(false, |c| c.is_ascii_digit())
+                || t.chars().next().is_some_and(|c| c.is_ascii_digit())
                     && (t.contains('.') || t.contains(')'))
         })
         .count();
@@ -372,8 +410,16 @@ fn try_list(_g: &Grid, area: Rect, rows: &[&RowInfo]) -> Option<Node> {
     let mut node = Node::new("list", area);
     for r in rows {
         let (label, _) = strip_expander(r.text.trim());
-        let mut item = Node::new("listitem", Rect { x: area.x, y: r.y, w: area.w, h: 1 })
-            .valued(label);
+        let mut item = Node::new(
+            "listitem",
+            Rect {
+                x: area.x,
+                y: r.y,
+                w: area.w,
+                h: 1,
+            },
+        )
+        .valued(label);
         if r.painted {
             item.states.push("selected".into());
         }
@@ -431,8 +477,7 @@ pub fn analyze(g: &Grid, area: Rect) -> Vec<Node> {
             (0x2580..=0x259F).contains(&c) || matches!(g.at(x, y).ch(), '#' | '=')
         })
         .count();
-    let bar_like =
-        painted_cells >= (area.w as usize) / 4 || block_cells >= (area.w as usize) / 5;
+    let bar_like = painted_cells >= (area.w as usize) / 4 || block_cells >= (area.w as usize) / 5;
     if bar_like && content.len() <= 3 {
         let value = percent_in(&joined).unwrap_or_else(|| {
             let filled = block_cells as f64 / (area.w.max(1) as f64 * content.len().max(1) as f64);

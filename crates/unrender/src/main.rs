@@ -51,18 +51,36 @@ fn main() {
     );
 
     if stats {
+        // Sizes only — see emit::size_of. Real token counts come from
+        // `xtask report`, which asks the provider.
         let raw = String::from_utf8_lossy(&bytes).to_string();
         let plain = strip_ansi(&raw);
+        let json_compact = serde_json::to_string(&root).unwrap();
+        let encodings = [
+            ("raw", &raw),
+            ("plain", &plain),
+            ("compact", &compact),
+            ("nogeo", &nogeo),
+            ("toon", &toon),
+            ("json", &json_compact),
+        ];
+        let sizes: serde_json::Map<String, serde_json::Value> = encodings
+            .iter()
+            .map(|(name, text)| {
+                let (bytes, chars) = emit::size_of(text);
+                (
+                    (*name).to_string(),
+                    serde_json::json!({ "bytes": bytes, "chars": chars }),
+                )
+            })
+            .collect();
         eprintln!(
-            "STATS\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
-            path,
-            root.count(),
-            emit::count_tokens(&raw),
-            emit::count_tokens(&plain),
-            emit::count_tokens(&compact),
-            emit::count_tokens(&nogeo),
-            emit::count_tokens(&toon),
-            emit::count_tokens(&serde_json::to_string(&root).unwrap()),
+            "{}",
+            serde_json::json!({
+                "fixture": path,
+                "nodes": root.count(),
+                "sizes": sizes,
+            })
         );
     }
 }

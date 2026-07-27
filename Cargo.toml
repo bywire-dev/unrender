@@ -1,0 +1,29 @@
+# Virtual workspace: there is deliberately no [package] here.
+#
+# `cargo publish -p unrender` packages only crates/unrender, so fixtures/,
+# results/, xtask/ and the benchmark are excluded by the shape of the repo
+# rather than by an exclude-list somebody has to remember to maintain.
+[workspace]
+resolver = "2"
+members = [
+    "crates/unrender",
+    "crates/unrender-eval",
+    "crates/unrender-bench",
+    "xtask",
+]
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.82"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/bywire-dev/unrender"
+authors = ["bywire-dev"]
+
+[workspace.dependencies]
+unrender = { path = "crates/unrender" }
+unrender-eval = { path = "crates/unrender-eval" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.9"
+walkdir = "2"
+anyhow = "1"

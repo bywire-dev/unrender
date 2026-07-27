@@ -1,0 +1,17 @@
+[package]
+name = "unrender-eval"
+version = "0.1.0"
+description = "Evaluation harness for unrender: fidelity, structural scoring, actuation. Not published."
+publish = false
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+unrender = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+walkdir = { workspace = true }
+anyhow = { workspace = true }

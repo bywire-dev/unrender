@@ -1,0 +1,33 @@
+{
+  "note": "Recorded metrics for truth-bearing fixtures. Entries with selection_ok=false are KNOWN FAILURES, recorded deliberately so that fixing them registers as a visible improvement rather than a silently-greening check.",
+  "fixtures": {
+    "legacy/ratatui": {
+      "recall": 1.0,
+      "precision": 0.8571428571428571,
+      "role_agreement": 1.0,
+      "mean_iou": 1.0,
+      "selection_ok": true
+    },
+    "legacy/ratatui-moved": {
+      "recall": 1.0,
+      "precision": 0.8571428571428571,
+      "role_agreement": 1.0,
+      "mean_iou": 1.0,
+      "selection_ok": true
+    },
+    "legacy/textual": {
+      "recall": 1.0,
+      "precision": 0.8333333333333334,
+      "role_agreement": 1.0,
+      "mean_iou": 1.0,
+      "selection_ok": true
+    },
+    "legacy/textual-moved": {
+      "recall": 1.0,
+      "precision": 0.8333333333333334,
+      "role_agreement": 1.0,
+      "mean_iou": 1.0,
+      "selection_ok": false
+    }
+  }
+}

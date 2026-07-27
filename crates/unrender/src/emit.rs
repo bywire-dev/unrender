@@ -137,10 +137,14 @@ pub fn toon(node: &Node, depth: usize, out: &mut String) {
     }
 }
 
-pub fn count_tokens(s: &str) -> usize {
-    match tiktoken_rs::cl100k_base() {
-        Ok(bpe) => bpe.encode_with_special_tokens(s).len(),
-        // Fall back to a rough proxy rather than failing the run.
-        Err(_) => s.len() / 4,
-    }
+/// Byte and character size of an encoding.
+///
+/// Deliberately *not* a token count. Token counts are model-specific and must
+/// come from the provider (`POST /v1/messages/count_tokens`) — a local BPE
+/// approximation built for a different model family undercounts Claude by
+/// 15-20% on prose and considerably more on the box-drawing and code-like
+/// content a terminal dump is made of. `xtask report` does the real counting;
+/// this is only a cheap offline proxy for eyeballing relative size.
+pub fn size_of(s: &str) -> (usize, usize) {
+    (s.len(), s.chars().count())
 }

@@ -1,0 +1,57 @@
+name: ci
+
+# Drift detection only. This workflow never calls a model and never spends
+# money — the LLM benchmark is invoked manually and its results committed
+# deliberately. See results/BENCHMARK.md.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: fmt, clippy, test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@v2
+
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+
+      # The suite is pure: no zellij, no network, no API key. Prove it rather
+      # than assert it — a live-tool dependency creeping in would otherwise
+      # only surface as a mysterious failure on somebody's laptop.
+      - name: assert no live-tool dependency
+        run: |
+          mkdir -p /tmp/empty-bin
+          PATH=/tmp/empty-bin:/usr/bin:/bin cargo test --workspace -- --nocapture
+
+  publish-safety:
+    name: published crate stays clean
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+
+      # The virtual-workspace layout is supposed to make it structurally
+      # impossible for fixtures, tooling or results to reach crates.io.
+      # Verify that, rather than trusting it.
+      - name: no fixtures/tooling/results in the package
+        run: |
+          cargo package --list -p unrender > /tmp/files.txt
+          cat /tmp/files.txt
+          if grep -E '^(fixtures|results|xtask|docs)/' /tmp/files.txt; then
+            echo "::error::non-crate paths leaked into the published package"
+            exit 1
+          fi
+
+      - run: cargo publish --dry-run -p unrender

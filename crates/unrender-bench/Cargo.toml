@@ -1,0 +1,13 @@
+[package]
+name = "unrender-bench"
+version = "0.1.0"
+description = "The TUI benchmark for LLMs. Not published."
+publish = false
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }

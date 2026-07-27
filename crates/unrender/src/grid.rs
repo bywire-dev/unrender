@@ -115,7 +115,11 @@ impl Grid {
                     Some(c) => {
                         let t = c.contents();
                         (
-                            if t.is_empty() { " ".to_string() } else { t.to_string() },
+                            if t.is_empty() {
+                                " ".to_string()
+                            } else {
+                                t.to_string()
+                            },
                             Style {
                                 fg: Some(c.fgcolor().into()),
                                 bg: Some(c.bgcolor().into()),
