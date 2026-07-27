@@ -118,6 +118,58 @@ pub fn run(root: &Path) -> Result<()> {
          a different model's tokenizer.\n"
     )?;
 
+    writeln!(report, "## What these columns mean\n")?;
+    writeln!(
+        report,
+        "- **truth** -- where ground truth for this fixture comes from. \
+         `framework` means the app's own layout engine computed the real \
+         rects (ratatui's `TestBackend`, or the spike's instrumented \
+         Textual app); `human` means a person annotated it by hand; `none` \
+         means there is no independent ground truth, so this fixture is \
+         never scored on recall/role%/IoU -- only round-trip fidelity."
+    )?;
+    writeln!(
+        report,
+        "- **fidelity** -- round-trip content preservation: tree → grid → \
+         diff against the original, chrome (box-drawing, block glyphs) \
+         excluded from both sides. Answers *did we lose content*, not *did \
+         we get the structure right* -- a tree that flattened the whole \
+         screen into one text block would score high here while destroying \
+         every bit of structure. See `crates/unrender/src/render.rs`."
+    )?;
+    writeln!(
+        report,
+        "- **recall** -- of the nodes in the ground truth, what fraction \
+         did `unrender` find at all (IoU ≥ 0.5 against some inferred node)? \
+         Only meaningful where `truth` is `framework` or `human`."
+    )?;
+    writeln!(
+        report,
+        "- **role%** -- of the matched nodes, what fraction got the *same \
+         role* as ground truth (table vs list vs panel, etc.)? A node can \
+         count toward recall by overlapping the right rectangle while still \
+         being misclassified -- this catches that."
+    )?;
+    writeln!(
+        report,
+        "- **IoU** (Intersection-over-Union) -- mean overlap ratio between \
+         each matched node's inferred rectangle and its ground-truth \
+         rectangle (intersection area / union area; 1.00 = pixel-perfect, \
+         0 = no overlap). The geometric half of \"did we get the layout \
+         right\"; role% is the semantic half."
+    )?;
+    writeln!(
+        report,
+        "- **raw / plain / compact / toon / json** -- real Claude token \
+         counts for each encoding of this fixture: the untouched ANSI \
+         capture, ANSI with escape codes stripped, `unrender`'s indented \
+         encoding (with `@x,y,w,h` geometry), TOON-flavored, and JSON. \
+         `raw` and `plain` are the controls `unrender`'s own encodings have \
+         to beat. (A sixth encoding, `nogeo` -- `compact` without \
+         geometry -- isn't in this table; see `BENCHMARK.md` for where it \
+         matters: whether an agent needs coordinates at all.)\n"
+    )?;
+
     writeln!(
         report,
         "| fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | toon | json | cheapest |"
@@ -191,7 +243,7 @@ pub fn run(root: &Path) -> Result<()> {
             ));
         }
 
-        write_detail(root, f, &enc, &fid, recall, role_pct, iou)?;
+        write_detail(root, f, &enc, &tok, &fid, recall, role_pct, iou)?;
     }
 
     writeln!(report, "\n## Known limitations\n")?;
@@ -234,10 +286,33 @@ pub fn run(root: &Path) -> Result<()> {
     Ok(())
 }
 
+/// Replaces control bytes that would otherwise execute as terminal commands
+/// in a rendered markdown viewer with a visible, literal escape -- the point
+/// of this section is to show a reader what raw ANSI actually looks like,
+/// not to repaint it.
+fn escape_for_display(s: &str) -> String {
+    s.chars()
+        .map(|c| match c {
+            '\x1b' => "\\x1b".to_string(),
+            '\r' => String::new(),
+            c => c.to_string(),
+        })
+        .collect()
+}
+
+fn ratio(baseline: Option<usize>, n: Option<usize>) -> String {
+    match (baseline, n) {
+        (Some(b), Some(v)) if v > 0 => format!("{:.2}x", b as f64 / v as f64),
+        _ => "-".to_string(),
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
 fn write_detail(
     root: &Path,
     f: &Fixture,
     enc: &Encodings,
+    tok: &TokenRow,
     fid: &unrender::render::Fidelity,
     recall: Option<f64>,
     role_pct: Option<f64>,
@@ -263,7 +338,41 @@ fn write_detail(
         )?;
     }
 
-    writeln!(d, "\n## Before (color-stripped)\n")?;
+    // Bytes come straight from each encoding's own String -- the same bytes
+    // fed to count_tokens, never a length measured off this markdown file.
+    writeln!(d, "\n## Sizes\n")?;
+    writeln!(
+        d,
+        "| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |"
+    )?;
+    writeln!(d, "|---|---:|---:|---:|---:|")?;
+    let rows: [(&str, &str, Option<usize>); 5] = [
+        ("raw", &enc.raw, tok.raw),
+        ("plain", &enc.plain, tok.plain),
+        ("compact", &enc.compact, tok.compact),
+        ("toon", &enc.toon, tok.toon),
+        ("json", &enc.json, tok.json),
+    ];
+    let plain_bytes = enc.plain.len();
+    for (name, text, tokens) in rows {
+        writeln!(
+            d,
+            "| {name} | {} | {} | {} | {} |",
+            text.len(),
+            fmt_tok(tokens),
+            ratio(Some(plain_bytes), Some(text.len())),
+            ratio(tok.plain, tokens),
+        )?;
+    }
+
+    writeln!(
+        d,
+        "\n<details><summary>Before — raw ANSI ({} bytes, escapes shown literally)</summary>\n\n```\n{}\n```\n\n</details>\n",
+        enc.raw.len(),
+        escape_for_display(enc.raw.trim_end())
+    )?;
+
+    writeln!(d, "## Before (color-stripped)\n")?;
     writeln!(d, "```\n{}\n```\n", enc.plain.trim_end())?;
 
     writeln!(d, "## After — compact\n")?;

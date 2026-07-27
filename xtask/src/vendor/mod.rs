@@ -5,6 +5,7 @@
 
 mod ansi;
 mod bubbletea;
+pub mod field;
 mod ink;
 mod ratatui_app;
 mod svg_term;
@@ -31,17 +32,15 @@ pub fn run(root: &Path, framework: Option<&str>) -> Result<()> {
 }
 
 fn ratatui(root: &Path) -> Result<()> {
-    let dir = root.join("fixtures/vendor/ratatui");
+    let dir = root.join("fixtures/vendor");
     std::fs::create_dir_all(&dir)?;
 
-    for (name, selected) in [("default", 0usize), ("moved", 2)] {
-        let (ansi, truth) = ratatui_app::render(selected)?;
-        std::fs::write(dir.join(format!("{name}.ansi")), ansi)?;
-        std::fs::write(
-            dir.join(format!("{name}.truth.json")),
-            serde_json::to_string(&truth)?,
-        )?;
-        println!("wrote fixtures/vendor/ratatui/{name}.{{ansi,truth.json}}");
-    }
+    let (ansi, truth) = ratatui_app::render()?;
+    std::fs::write(dir.join("ratatui.ansi"), ansi)?;
+    std::fs::write(
+        dir.join("ratatui.truth.json"),
+        serde_json::to_string(&truth)?,
+    )?;
+    println!("wrote fixtures/vendor/ratatui.{{ansi,truth.json}}");
     Ok(())
 }

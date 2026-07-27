@@ -1,10 +1,57 @@
-# legacy/top
+# field/top
 
 [← back to REPORT.md](../REPORT.md)
 
 truth source: `none`
 
 content preservation: **71%** (chrome-excluded; 1321 non-blank content cells)
+
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 3832 | 2148 | 0.63x | 0.58x |
+| plain | 2409 | 1251 | 1.00x | 1.00x |
+| compact | 8607 | 5039 | 0.28x | 0.25x |
+| toon | 1875 | 1271 | 1.28x | 0.98x |
+| json | 65356 | 16388 | 0.04x | 0.08x |
+
+<details><summary>Before — raw ANSI (3832 bytes, escapes shown literally)</summary>
+
+```
+\x1b[mtop - 11:33:41 up 33 min,  0 user,  load average: 1.17, 0.78, 0.87
+\x1b[mTasks:\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  93 \x1b[mtotal,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m   2 \x1b[mrunning,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  91 \x1b[msleeping,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m   0 \x1b[mstopped,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m   0 \x1b[mzombie
+\x1b[m%Cpu(s):\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m 23.8 \x1b[mus,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  9.9 \x1b[msy,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  0.0 \x1b[mni,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m 66.2 \x1b[mid,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  0.0 \x1b[mwa,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  0.0 \x1b[mhi,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  0.0 \x1b[msi,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  0.0 \x1b[mst
+\x1b[mMiB Mem :\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  16075.4 \x1b[mtotal,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  12851.8 \x1b[mfree,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m    817.7 \x1b[mused,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m   2727.0 \x1b[mbuff/cache
+\x1b[mMiB Swap:\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m      0.0 \x1b[mtotal,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m      0.0 \x1b[mfree,\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m      0.0 \x1b[mused.\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m  15257.7 \x1b[mavail Mem
+
+\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[7m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+\x1b[m24737 root      20   0  338980  37072  10348 S 119.0   0.2   2:15.48 python3
+\x1b[m  566 root      20   0 6013732 432244 188284 S   3.6   2.6   1:50.55 claude
+\x1b[m27734 root      20   0 1562472  72376  36944 S   2.4   0.4   0:00.20 zellij
+\x1b[m    1 root      20   0   21760   5588   2788 S   1.2   0.0   0:08.92 process_api
+\x1b[m    2 root      20   0       0      0      0 S   0.0   0.0   0:00.01 kthreadd
+\x1b[m    3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_workqueue_release
+\x1b[m    4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-rcu_gp
+\x1b[m    5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-sync_wq
+\x1b[m    6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-kvfree_rcu_reclaim
+\x1b[m    7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-slub_flushwq
+\x1b[m    8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-netns
+\x1b[m   10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+\x1b[m   13 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-mm_percpu_wq
+\x1b[m   14 root      20   0       0      0      0 S   0.0   0.0   0:00.05 ksoftirqd/0
+\x1b[m   15 root      20   0       0      0      0 I   0.0   0.0   0:00.73 rcu_preempt
+\x1b[m   16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_par_gp_kthread_worker+
+\x1b[m   17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_gp_kthread_worker
+\x1b[m   18 root      rt   0       0      0      0 S   0.0   0.0   0:00.03 migration/0
+\x1b[m   19 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+\x1b[m   20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1
+\x1b[m   21 root      rt   0       0      0      0 S   0.0   0.0   0:00.50 migration/1
+\x1b[m   22 root      20   0       0      0      0 S   0.0   0.0   0:00.03 ksoftirqd/1
+\x1b[m   23 root      20   0       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0-mm_percpu_wq\x1b[m
+```
+
+</details>
 
 ## Before (color-stripped)
 

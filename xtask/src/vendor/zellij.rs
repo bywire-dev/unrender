@@ -130,8 +130,13 @@ fn pane_id_of(p: &serde_json::Value) -> Option<String> {
     p.get("id").map(|v| v.to_string())
 }
 
-fn new_pane(session: &str, cmd: &[String]) -> Result<()> {
-    let mut args = vec!["new-pane".to_string(), "--".to_string()];
+fn new_pane(session: &str, cmd: &[String], cwd: Option<&Path>) -> Result<()> {
+    let mut args = vec!["new-pane".to_string()];
+    if let Some(dir) = cwd {
+        args.push("--cwd".to_string());
+        args.push(dir.to_str().context("non-utf8 cwd")?.to_string());
+    }
+    args.push("--".to_string());
     args.extend(cmd.iter().cloned());
     action(args, Some(session))?;
     Ok(())
@@ -145,6 +150,12 @@ pub fn dump_screen(session: &str, pane_id: &str) -> Result<String> {
     Ok(String::from_utf8_lossy(&out.stdout).to_string())
 }
 
+/// Not called anywhere right now -- no fixture currently needs navigation --
+/// but kept as a real capability rather than deleted. The bar for using it:
+/// revealing a genuinely different part of an app's UI (a different tab, a
+/// panel that only appears after selecting something) is worth it; moving a
+/// cursor down a list to prove the harness *can* send keys is not.
+#[allow(dead_code)]
 pub fn send_keys(session: &str, pane_id: &str, keys: &[&str]) -> Result<()> {
     let mut args = vec![
         "send-keys".to_string(),
@@ -226,6 +237,19 @@ pub fn start_app(
     cols: u16,
     rows: u16,
 ) -> Result<(PtyClient, String)> {
+    start_app_in(session, cmd, cols, rows, None)
+}
+
+/// Same as [`start_app`], but launches `cmd` in `cwd` instead of the xtask
+/// process's own directory -- needed for apps like lazygit/gitui that must
+/// run inside a specific (in our case, synthetic) git repo.
+pub fn start_app_in(
+    session: &str,
+    cmd: &[String],
+    cols: u16,
+    rows: u16,
+    cwd: Option<&Path>,
+) -> Result<(PtyClient, String)> {
     kill_session(session);
     let boot_layout = std::env::temp_dir().join(format!("zj-{session}-boot.kdl"));
     write_layout(&boot_layout, &["sleep".to_string(), "100000".to_string()])?;
@@ -237,7 +261,7 @@ pub fn start_app(
         .filter_map(pane_id_of)
         .collect();
 
-    new_pane(session, cmd)?;
+    new_pane(session, cmd, cwd)?;
     std::thread::sleep(Duration::from_millis(2500));
     client.drain();
 

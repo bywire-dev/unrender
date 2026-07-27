@@ -6,6 +6,53 @@ truth source: `none`
 
 content preservation: **47%** (chrome-excluded; 208 non-blank content cells)
 
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 2198 | 499 | 0.84x | 0.57x |
+| plain | 1847 | 285 | 1.00x | 1.00x |
+| compact | 1071 | 549 | 1.72x | 0.52x |
+| toon | 382 | 170 | 4.84x | 1.68x |
+| json | 7959 | 1990 | 0.23x | 0.14x |
+
+<details><summary>Before — raw ANSI (2198 bytes, escapes shown literally)</summary>
+
+```
+\x1b[m┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+\x1b[m│Deploy Console :: cluster prod-eu-1                                                               │
+\x1b[m└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+\x1b[m┌─────────────| services |─────────────┐┌────────────────────────| detail |────────────────────────┐
+\x1b[m│(*) api-gateway   running            \x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m^\x1b[m││name:    api-gateway                                      │
+\x1b[m│( ) auth-service  running            \x1b[39m\x1b[48;5;238m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m \x1b[m││state:   running                                          │
+\x1b[m│( ) billing       degraded           \x1b[39m\x1b[48;5;238m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m \x1b[m││region:  eu-1                                             │
+\x1b[m│( ) search-index  running            \x1b[39m\x1b[48;5;238m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m \x1b[m││replicas: 3                                               │
+\x1b[m│( ) mailer        stopped            \x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23mv\x1b[m││                                                          │
+\x1b[m└──────────────────────────────────────┘└──────────────────────────────────────────────────────────┘
+\x1b[m j/k move   q quit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\x1b[m
+```
+
+</details>
+
 ## Before (color-stripped)
 
 ```

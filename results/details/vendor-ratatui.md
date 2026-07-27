@@ -1,4 +1,4 @@
-# vendor/ratatui/default
+# vendor/ratatui
 
 [← back to REPORT.md](../REPORT.md)
 
@@ -7,6 +7,53 @@ truth source: `framework`
 content preservation: **70%** (chrome-excluded; 298 non-blank content cells)
 
 structural: recall 100%, role agreement 100%, mean IoU 1.00
+
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 4527 | 848 | 0.92x | 0.68x |
+| plain | 4145 | 575 | 1.00x | 1.00x |
+| compact | 1464 | 750 | 2.83x | 0.77x |
+| toon | 538 | 232 | 7.70x | 2.48x |
+| json | 10666 | 2657 | 0.39x | 0.22x |
+
+<details><summary>Before — raw ANSI (4527 bytes, escapes shown literally)</summary>
+
+```
+\x1b[0m┌zellij-spike──────────────────────────────────────────────────────────────────────────────────────┐\x1b[0m
+\x1b[0m│Deploy Console  ::  cluster prod-eu-1                                                             │\x1b[0m
+\x1b[0m└──────────────────────────────────────────────────────────────────────────────────────────────────┘\x1b[0m
+\x1b[0m┌services──────────────────────────────────────────────────┐┌events────────────────────────────────┐\x1b[0m
+\x1b[0m│\x1b[0;1m  SERVICE          STATE      P99                         \x1b[0m││deploy started                        │\x1b[0m
+\x1b[0m│\x1b[0;97;44m> api-gateway      running    12ms                        \x1b[0m││image pulled                          │\x1b[0m
+\x1b[0m│  auth-service     \x1b[0;32mrunning   \x1b[0m 31ms                        ││health check ok                       │\x1b[0m
+\x1b[0m│  billing          \x1b[0;33mdegraded  \x1b[0m 412ms                       ││traffic shifted 10%                   │\x1b[0m
+\x1b[0m│  search-index     \x1b[0;32mrunning   \x1b[0m 88ms                        ││traffic shifted 50%                   │\x1b[0m
+\x1b[0m│  mailer           \x1b[0;31mstopped   \x1b[0m -                           ││                                      │\x1b[0m
+\x1b[0m│  scheduler        \x1b[0;32mrunning   \x1b[0m 5ms                         ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          ││                                      │\x1b[0m
+\x1b[0m│                                                          │└──────────────────────────────────────┘\x1b[0m
+\x1b[0m│                                                          │┌rollout───────────────────────────────┐\x1b[0m
+\x1b[0m│                                                          ││\x1b[0;36m█████████████████\x1b[0;46m50\x1b[0;36m%                  \x1b[0m│\x1b[0m
+\x1b[0m└──────────────────────────────────────────────────────────┘└──────────────────────────────────────┘\x1b[0m
+\x1b[0;97;100m q quit  j/k move  ENTER select                                                                     \x1b[0m
+```
+
+</details>
 
 ## Before (color-stripped)
 

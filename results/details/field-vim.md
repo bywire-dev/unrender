@@ -1,10 +1,57 @@
-# legacy/vim
+# field/vim
 
 [← back to REPORT.md](../REPORT.md)
 
 truth source: `none`
 
 content preservation: **76%** (chrome-excluded; 752 non-blank content cells)
+
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 968 | 438 | 0.92x | 0.86x |
+| plain | 895 | 377 | 1.00x | 1.00x |
+| compact | 1675 | 833 | 0.53x | 0.45x |
+| toon | 1056 | 456 | 0.85x | 0.83x |
+| json | 7109 | 2185 | 0.13x | 0.17x |
+
+<details><summary>Before — raw ANSI (968 bytes, escapes shown literally)</summary>
+
+```
+\x1b[m#!/usr/bin/env python3
+\x1b[m"""Textual corpus app, instrumented to emit GROUND TRUTH.
+
+\x1b[mTextual knows exactly where every widget landed (`widget.region`). We dump that
+\x1b[mreal DOM to JSON on a timer, so the inferred accessibility tree can be scored
+\x1b[magainst what the framework actually laid out rather than against our own
+\x1b[mimpression of the screenshot.
+
+\x1b[mKeys: j/k or Down/Up move the DataTable cursor, q quits.
+\x1b[m"""
+\x1b[mimport json
+\x1b[mimport os
+\x1b[mimport sys
+
+\x1b[mfrom textual.app import App, ComposeResult
+\x1b[mfrom textual.containers import Horizontal, Vertical
+\x1b[mfrom textual.widgets import DataTable, Footer, Header, Static, Tree
+
+\x1b[mTRUTH_PATH = os.environ.get("TRUTH_PATH", "")
+
+\x1b[mSERVICES = [
+\x1b[m    ("api-gateway", "running", "12ms"),
+\x1b[m    ("auth-service", "running", "31ms"),
+\x1b[m    ("billing", "degraded", "412ms"),
+\x1b[m    ("search-index", "running", "88ms"),
+\x1b[m    ("mailer", "stopped", "-"),
+\x1b[m    ("scheduler", "running", "5ms"),
+\x1b[m]
+
+\x1b[m
+```
+
+</details>
 
 ## Before (color-stripped)
 

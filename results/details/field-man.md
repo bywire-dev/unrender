@@ -1,10 +1,33 @@
-# legacy/man
+# field/man
 
 [← back to REPORT.md](../REPORT.md)
 
 truth source: `none`
 
 content preservation: **100%** (chrome-excluded; 228 non-blank content cells)
+
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 291 | 97 | 0.95x | 0.84x |
+| plain | 275 | 81 | 1.00x | 1.00x |
+| compact | 330 | 118 | 0.83x | 0.69x |
+| toon | 302 | 94 | 0.91x | 0.86x |
+| json | 608 | 226 | 0.45x | 0.36x |
+
+<details><summary>Before — raw ANSI (291 bytes, escapes shown literally)</summary>
+
+```
+\x1b[mThis system has been minimized by removing packages and content that are
+\x1b[mnot required on a system that users do not log into.
+
+\x1b[mTo restore this content, including manpages, you can run the 'unminimize'
+\x1b[mcommand. You will still need to ensure the 'man-db' package is installed.
+\x1b[m
+```
+
+</details>
 
 ## Before (color-stripped)
 

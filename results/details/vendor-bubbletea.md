@@ -1,10 +1,37 @@
-# vendor/bubbletea/default
+# vendor/bubbletea
 
 [← back to REPORT.md](../REPORT.md)
 
 truth source: `none`
 
 content preservation: **66%** (chrome-excluded; 184 non-blank content cells)
+
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 2275 | 1045 | 0.40x | 0.20x |
+| plain | 903 | 206 | 1.00x | 1.00x |
+| compact | 900 | 495 | 1.00x | 0.42x |
+| toon | 281 | 135 | 3.21x | 1.53x |
+| json | 6169 | 1682 | 0.15x | 0.12x |
+
+<details><summary>Before — raw ANSI (2275 bytes, escapes shown literally)</summary>
+
+```
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m╭────────────────────────────────────╮╭──────────────────────────────╮
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[m \x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23mSERVICE        STATE      REGION\x1b[m   \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m││\x1b[m name:    api-gateway         \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[m \x1b[38;5;230m\x1b[48;5;62m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23mapi-gateway    running    eu-1  \x1b[m   \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m││\x1b[m state:   running             \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[m auth-service   running    eu-1     \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m││\x1b[m region:  eu-1                \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[m billing        degraded   us-1     \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m││\x1b[m replicas: 3                  \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[m search-index   running    us-1     \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│╰──────────────────────────────╯
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[m mailer         stopped    eu-1     \x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│
+\x1b[38;5;63m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m╰────────────────────────────────────╯
+\x1b[38;5;255m\x1b[48;5;240m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m j/k move   q quit \x1b[39m\x1b[48;5;240m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m                                                           
+\x1b[m
+```
+
+</details>
 
 ## Before (color-stripped)
 

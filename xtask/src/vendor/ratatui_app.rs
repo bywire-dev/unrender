@@ -39,12 +39,12 @@ fn truth_node(role: &str, name: &str, r: Rect) -> serde_json::Value {
     })
 }
 
-/// Renders one frame with the table selection at `selected`, returning the
-/// ANSI text and the ground truth ratatui itself computed for that frame.
-pub fn render(selected: usize) -> anyhow::Result<(String, serde_json::Value)> {
+/// Renders the deploy-console frame, returning the ANSI text and the ground
+/// truth ratatui itself computed for it.
+pub fn render() -> anyhow::Result<(String, serde_json::Value)> {
     let backend = TestBackend::new(100, 30);
     let mut terminal = Terminal::new(backend)?;
-    let mut state = TableState::default().with_selected(Some(selected));
+    let mut state = TableState::default().with_selected(Some(0));
     let mut truth = serde_json::Value::Null;
 
     terminal.draw(|frame| {

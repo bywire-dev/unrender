@@ -1,10 +1,40 @@
-# vendor/ink/moved
+# vendor/ink
 
 [← back to REPORT.md](../REPORT.md)
 
 truth source: `none`
 
 content preservation: **80%** (chrome-excluded; 205 non-blank content cells)
+
+## Sizes
+
+| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |
+|---|---:|---:|---:|---:|
+| raw | 2053 | 563 | 0.77x | 0.47x |
+| plain | 1572 | 266 | 1.00x | 1.00x |
+| compact | 1029 | 529 | 1.53x | 0.50x |
+| toon | 387 | 159 | 4.06x | 1.67x |
+| json | 7624 | 1914 | 0.21x | 0.14x |
+
+<details><summary>Before — raw ANSI (2053 bytes, escapes shown literally)</summary>
+
+```
+\x1b[36m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m╭────────────────────────────────────────────────────────────────────────────╮
+\x1b[36m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23m Deploy Console — cluster prod-eu-1 \x1b[m                                        \x1b[36m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m│
+\x1b[36m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m╰────────────────────────────────────────────────────────────────────────────╯
+\x1b[m╭────────────────────────────────────────────╮╭──────────────────────────────╮
+\x1b[m│\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[27m\x1b[25m\x1b[25m\x1b[1m\x1b[24m\x1b[22m\x1b[1m\x1b[23mSERVICE        STATE      P99     \x1b[m          ││events                        │
+\x1b[m│\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[7m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23mapi-gateway    running    12ms    \x1b[m          ││• deploy started              │
+\x1b[m│auth-service   running    31ms              ││• image pulled                │
+\x1b[m│billing        degraded   412ms             ││• health check ok             │
+\x1b[m│search-index   running    88ms              ││                              │
+\x1b[m│mailer         stopped    -                 ││                              │
+\x1b[m╰────────────────────────────────────────────╯╰──────────────────────────────╯
+\x1b[39m\x1b[49m\x1b[29m\x1b[28m\x1b[7m\x1b[25m\x1b[25m\x1b[22m\x1b[24m\x1b[22m\x1b[23m j/k move   q quit
+\x1b[m
+```
+
+</details>
 
 ## Before (color-stripped)
 
@@ -34,7 +64,7 @@ application @0,0,78,13
         cell @1,4,12,1 SERVICE
         cell @16,4,8,1 STATE
         cell @27,4,5,1 P99
-      row @1,5,44,1
+      row [selected] @1,5,44,1
         cell @1,5,12,1 api-gateway
         cell @16,5,8,1 running
         cell @27,5,5,1 12ms
@@ -42,7 +72,7 @@ application @0,0,78,13
         cell @1,6,12,1 auth-service
         cell @16,6,8,1 running
         cell @27,6,5,1 31ms
-      row [selected] @1,7,44,1
+      row @1,7,44,1
         cell @1,7,12,1 billing
         cell @16,7,8,1 degraded
         cell @27,7,5,1 412ms
@@ -69,9 +99,9 @@ application
   text: Deploy Console — cluster prod-eu-1
   panel
     table [5]{SERVICE,STATE,P99}:
-       api-gateway,running,12ms
+      *api-gateway,running,12ms
        auth-service,running,31ms
-      *billing,degraded,412ms
+       billing,degraded,412ms
        search-index,running,88ms
        mailer,stopped,-
     list [4]:
@@ -171,6 +201,9 @@ application
                 44,
                 1
               ],
+              "states": [
+                "selected"
+              ],
               "children": [
                 {
                   "role": "cell",
@@ -252,9 +285,6 @@ application
                 7,
                 44,
                 1
-              ],
-              "states": [
-                "selected"
               ],
               "children": [
                 {

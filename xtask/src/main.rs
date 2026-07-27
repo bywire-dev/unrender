@@ -16,13 +16,14 @@ fn main() -> anyhow::Result<()> {
     match cmd.as_deref() {
         Some("report") => report::run(&root),
         Some("vendor") => vendor::run(&root, args.next().as_deref()),
+        Some("field") => vendor::field::run(&root, args.next().as_deref()),
         Some(other) => {
             eprintln!("unknown subcommand: {other}");
-            eprintln!("usage: xtask report | xtask vendor <framework>");
+            eprintln!("usage: xtask report | xtask vendor <framework> | xtask field <app>");
             std::process::exit(2);
         }
         None => {
-            eprintln!("usage: xtask report | xtask vendor <framework>");
+            eprintln!("usage: xtask report | xtask vendor <framework> | xtask field <app>");
             std::process::exit(2);
         }
     }

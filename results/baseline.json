@@ -8,21 +8,7 @@
       "mean_iou": 1.0,
       "selection_ok": true
     },
-    "legacy/textual-moved": {
-      "recall": 1.0,
-      "precision": 0.8333333333333334,
-      "role_agreement": 1.0,
-      "mean_iou": 1.0,
-      "selection_ok": false
-    },
-    "vendor/ratatui/default": {
-      "recall": 1.0,
-      "precision": 0.8571428571428571,
-      "role_agreement": 1.0,
-      "mean_iou": 1.0,
-      "selection_ok": true
-    },
-    "vendor/ratatui/moved": {
+    "vendor/ratatui": {
       "recall": 1.0,
       "precision": 0.8571428571428571,
       "role_agreement": 1.0,
@@ -31,22 +17,21 @@
     }
   },
   "fidelity": {
-    "legacy/dialog": 0.7111111111111111,
-    "legacy/dialog-moved": 0.7111111111111111,
-    "legacy/less": 0.7556440903054449,
-    "legacy/man": 1.0,
+    "field/bat": 0.9424280350438048,
+    "field/btop": 0.07401032702237521,
+    "field/dialog": 0.7111111111111111,
+    "field/gitui": 0.37089201877934275,
+    "field/htop": 0.7049645390070922,
+    "field/lazygit": 0.8642611683848798,
+    "field/less": 0.7556440903054449,
+    "field/man": 1.0,
+    "field/top": 0.7070401211203634,
+    "field/vim": 0.7553191489361702,
     "legacy/ptk": 0.47115384615384615,
-    "legacy/ptk-moved": 0.47115384615384615,
     "legacy/textual": 0.6652360515021459,
-    "legacy/textual-moved": 0.6652360515021459,
-    "legacy/top": 0.7070401211203634,
-    "legacy/vim": 0.7553191489361702,
-    "vendor/bubbletea/default": 0.6630434782608695,
-    "vendor/bubbletea/moved": 0.6740331491712708,
-    "vendor/ink/default": 0.7951219512195122,
-    "vendor/ink/moved": 0.7951219512195122,
-    "vendor/ratatui/default": 0.7013422818791947,
-    "vendor/ratatui/moved": 0.7013422818791947,
+    "vendor/bubbletea": 0.6630434782608695,
+    "vendor/ink": 0.7951219512195122,
+    "vendor/ratatui": 0.7013422818791947,
     "vendor/textual/list-view": 0.0,
     "vendor/textual/log": 1.0,
     "vendor/textual/progress-bar": 0.0,
