@@ -25,3 +25,7 @@ sha2 = "0.10"
 # Vendor fixture generation: TestBackend renders widgets offline, no live
 # terminal or zellij needed for frameworks that ship their own layout engine.
 ratatui = "0.30"
+# Textual's own golden snapshots are SVGs (Rich's terminal exporter); regex
+# is enough to pull them apart because the format is machine-generated and
+# highly regular (single-line, consistently-ordered attributes).
+regex = "1"

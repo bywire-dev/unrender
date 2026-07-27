@@ -46,6 +46,11 @@
     "legacy/top": 0.7070401211203634,
     "legacy/vim": 0.7553191489361702,
     "vendor/ratatui/default": 0.7013422818791947,
-    "vendor/ratatui/moved": 0.7013422818791947
+    "vendor/ratatui/moved": 0.7013422818791947,
+    "vendor/textual/list-view": 0.0,
+    "vendor/textual/log": 1.0,
+    "vendor/textual/progress-bar": 0.0,
+    "vendor/textual/table": 0.940846286701209,
+    "vendor/textual/tree": 0.004672897196261682
   }
 }

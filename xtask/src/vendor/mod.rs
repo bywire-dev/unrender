@@ -5,6 +5,8 @@
 
 mod ansi;
 mod ratatui_app;
+mod svg_term;
+mod textual;
 
 use std::path::Path;
 
@@ -13,8 +15,9 @@ use anyhow::{bail, Result};
 pub fn run(root: &Path, framework: Option<&str>) -> Result<()> {
     match framework {
         Some("ratatui") => ratatui(root),
-        Some(other) => bail!("unknown vendor target: {other}\nsupported: ratatui"),
-        None => bail!("usage: xtask vendor <framework>\nsupported: ratatui"),
+        Some("textual") => textual::run(root),
+        Some(other) => bail!("unknown vendor target: {other}\nsupported: ratatui, textual"),
+        None => bail!("usage: xtask vendor <framework>\nsupported: ratatui, textual"),
     }
 }
 

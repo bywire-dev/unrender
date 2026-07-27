@@ -22,6 +22,11 @@ Token counts are real Claude token counts (`claude-opus-5`, via `POST /v1/messag
 | [legacy/vim](details/legacy-vim.md) | none | 76% | - | - | - | 438 | 377 | 833 | 456 | 2185 | toon |
 | [vendor/ratatui/default](details/vendor-ratatui-default.md) | framework | 70% | 100% | 100% | 1.00 | 848 | 575 | 750 | 232 | 2657 | toon |
 | [vendor/ratatui/moved](details/vendor-ratatui-moved.md) | framework | 70% | 100% | 100% | 1.00 | 849 | 575 | 750 | 232 | 2657 | toon |
+| [vendor/textual/list-view](details/vendor-textual-list-view.md) | none | 0% | - | - | - | 874 | 99 | 65 | 33 | 208 | toon |
+| [vendor/textual/log](details/vendor-textual-log.md) | none | 100% | - | - | - | 844 | 25 | 149 | 43 | 547 | toon |
+| [vendor/textual/progress-bar](details/vendor-textual-progress-bar.md) | none | 0% | - | - | - | 682 | 117 | 73 | 57 | 145 | toon |
+| [vendor/textual/table](details/vendor-textual-table.md) | none | 94% | - | - | - | 10878 | 3074 | 5392 | 2511 | 16071 | toon |
+| [vendor/textual/tree](details/vendor-textual-tree.md) | none | 0% | - | - | - | 2954 | 468 | 384 | 368 | 456 | toon |
 
 ## Known limitations
 
@@ -29,7 +34,10 @@ Fixtures below 60% content preservation, named rather than left for someone to n
 
 - **legacy/ptk** — 47% content preservation. See [details/legacy-ptk.md](details/legacy-ptk.md).
 - **legacy/ptk-moved** — 47% content preservation. See [details/legacy-ptk-moved.md](details/legacy-ptk-moved.md).
+- **vendor/textual/list-view** — 0% content preservation. See [details/vendor-textual-list-view.md](details/vendor-textual-list-view.md).
+- **vendor/textual/progress-bar** — 0% content preservation. See [details/vendor-textual-progress-bar.md](details/vendor-textual-progress-bar.md).
+- **vendor/textual/tree** — 0% content preservation. See [details/vendor-textual-tree.md](details/vendor-textual-tree.md).
 
 ## Token efficiency
 
-TOON was cheapest on 16/16 fixtures where both were counted; JSON on 0/16. Not asserted in advance -- a tree's shape can flip which wins, and the numbers above are what actually happened, not a claim.
+TOON was cheapest on 21/21 fixtures where both were counted; JSON on 0/21. Not asserted in advance -- a tree's shape can flip which wins, and the numbers above are what actually happened, not a claim.
