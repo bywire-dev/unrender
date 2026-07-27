@@ -4,9 +4,12 @@
 //! guessing at one.
 
 mod ansi;
+mod bubbletea;
+mod ink;
 mod ratatui_app;
 mod svg_term;
 mod textual;
+mod zellij;
 
 use std::path::Path;
 
@@ -16,8 +19,14 @@ pub fn run(root: &Path, framework: Option<&str>) -> Result<()> {
     match framework {
         Some("ratatui") => ratatui(root),
         Some("textual") => textual::run(root),
-        Some(other) => bail!("unknown vendor target: {other}\nsupported: ratatui, textual"),
-        None => bail!("usage: xtask vendor <framework>\nsupported: ratatui, textual"),
+        Some("bubbletea") => bubbletea::run(root),
+        Some("ink") => ink::run(root),
+        Some(other) => {
+            bail!("unknown vendor target: {other}\nsupported: ratatui, textual, bubbletea, ink")
+        }
+        None => {
+            bail!("usage: xtask vendor <framework>\nsupported: ratatui, textual, bubbletea, ink")
+        }
     }
 }
 

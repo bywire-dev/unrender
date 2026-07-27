@@ -1,4 +1,4 @@
-# legacy/ink-moved
+# vendor/ink/default
 
 [← back to REPORT.md](../REPORT.md)
 
@@ -34,7 +34,7 @@ application @0,0,78,13
         cell @1,4,12,1 SERVICE
         cell @16,4,8,1 STATE
         cell @27,4,5,1 P99
-      row @1,5,44,1
+      row [selected] @1,5,44,1
         cell @1,5,12,1 api-gateway
         cell @16,5,8,1 running
         cell @27,5,5,1 12ms
@@ -42,7 +42,7 @@ application @0,0,78,13
         cell @1,6,12,1 auth-service
         cell @16,6,8,1 running
         cell @27,6,5,1 31ms
-      row [selected] @1,7,44,1
+      row @1,7,44,1
         cell @1,7,12,1 billing
         cell @16,7,8,1 degraded
         cell @27,7,5,1 412ms
@@ -69,9 +69,9 @@ application
   text: Deploy Console — cluster prod-eu-1
   panel
     table [5]{SERVICE,STATE,P99}:
-       api-gateway,running,12ms
+      *api-gateway,running,12ms
        auth-service,running,31ms
-      *billing,degraded,412ms
+       billing,degraded,412ms
        search-index,running,88ms
        mailer,stopped,-
     list [4]:
@@ -171,6 +171,9 @@ application
                 44,
                 1
               ],
+              "states": [
+                "selected"
+              ],
               "children": [
                 {
                   "role": "cell",
@@ -252,9 +255,6 @@ application
                 7,
                 44,
                 1
-              ],
-              "states": [
-                "selected"
               ],
               "children": [
                 {

@@ -1,4 +1,4 @@
-# legacy/bubbletea-moved
+# vendor/bubbletea/moved
 
 [← back to REPORT.md](../REPORT.md)
 

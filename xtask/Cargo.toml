@@ -29,3 +29,8 @@ ratatui = "0.30"
 # is enough to pull them apart because the format is machine-generated and
 # highly regular (single-line, consistently-ordered attributes).
 regex = "1"
+# bubbletea/Ink ship no offline test backend, so vendoring them means a real
+# pty attached to a real zellij session -- same mechanism `field/` capture
+# will need in Phase 5, built once here.
+pty-process = "0.5"
+nix = { version = "0.30", features = ["fs"] }

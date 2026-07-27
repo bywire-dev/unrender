@@ -1,4 +1,4 @@
-# legacy/bubbletea
+# vendor/bubbletea/default
 
 [← back to REPORT.md](../REPORT.md)
 
