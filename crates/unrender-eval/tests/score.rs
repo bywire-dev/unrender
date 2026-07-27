@@ -28,14 +28,15 @@ fn structural_score_matches_baseline() {
     );
 
     let recorded = Baseline::load(&root).expect("load baseline");
-    let mut fresh = Baseline {
-        note: "Recorded metrics for truth-bearing fixtures. Entries with \
-               selection_ok=false are KNOWN FAILURES, recorded deliberately so \
-               that fixing them registers as a visible improvement rather than \
-               a silently-greening check."
-            .to_string(),
-        fixtures: Default::default(),
-    };
+    // Start from what is on disk and replace only this test's section. Building
+    // a fresh Baseline here would silently discard the fidelity numbers the
+    // round-trip test records into the same file.
+    let mut fresh = recorded.clone().unwrap_or_default();
+    fresh.note = "Recorded metrics. Entries with selection_ok=false are KNOWN \
+                  FAILURES, recorded deliberately so that fixing them registers \
+                  as a visible improvement rather than a silently-greening check."
+        .to_string();
+    fresh.fixtures = Default::default();
 
     println!(
         "\n{:<26} {:>6} {:>6} {:>7} {:>7} {:>8}  vs baseline",

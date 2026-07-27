@@ -29,5 +29,23 @@
       "mean_iou": 1.0,
       "selection_ok": false
     }
+  },
+  "fidelity": {
+    "legacy/bubbletea": 0.6630434782608695,
+    "legacy/bubbletea-moved": 0.6740331491712708,
+    "legacy/dialog": 0.7111111111111111,
+    "legacy/dialog-moved": 0.7111111111111111,
+    "legacy/ink": 0.7951219512195122,
+    "legacy/ink-moved": 0.7951219512195122,
+    "legacy/less": 0.7556440903054449,
+    "legacy/man": 1.0,
+    "legacy/ptk": 0.47115384615384615,
+    "legacy/ptk-moved": 0.47115384615384615,
+    "legacy/ratatui": 0.7013422818791947,
+    "legacy/ratatui-moved": 0.7013422818791947,
+    "legacy/textual": 0.6652360515021459,
+    "legacy/textual-moved": 0.6652360515021459,
+    "legacy/top": 0.7070401211203634,
+    "legacy/vim": 0.7553191489361702
   }
 }

@@ -37,6 +37,11 @@ pub struct Baseline {
     pub note: String,
     #[serde(default)]
     pub fixtures: BTreeMap<String, FixtureMetrics>,
+    /// Round-trip `nonblank_match` per fixture. Separate from `fixtures`
+    /// because it covers *every* fixture, including the majority that have no
+    /// ground truth and so appear nowhere in structural scoring.
+    #[serde(default)]
+    pub fidelity: BTreeMap<String, f64>,
 }
 
 pub fn path(root: &Path) -> PathBuf {

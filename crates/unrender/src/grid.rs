@@ -86,6 +86,52 @@ pub struct Grid {
 }
 
 impl Grid {
+    /// An all-blank grid, for reconstructing a screen from a tree.
+    pub fn blank(w: u16, h: u16) -> Grid {
+        let cell = Cell {
+            text: " ".to_string(),
+            style: Style::default(),
+        };
+        Grid {
+            w,
+            h,
+            cells: vec![cell; (w as usize) * (h as usize)],
+        }
+    }
+
+    /// Write one cell. Out-of-bounds writes are dropped rather than panicking:
+    /// a reconstructed tree can legitimately describe content wider than the
+    /// grid it is being drawn into (a `value` longer than its own rect), and
+    /// clipping is the same thing the original terminal did.
+    pub fn set(&mut self, x: u16, y: u16, text: &str, style: Style) {
+        if x >= self.w || y >= self.h {
+            return;
+        }
+        let idx = (y as usize) * (self.w as usize) + (x as usize);
+        self.cells[idx] = Cell {
+            text: text.to_string(),
+            style,
+        };
+    }
+
+    /// Write a string starting at `x`, clipped to `max_x` inclusive.
+    ///
+    /// Advances by display width, so a CJK or emoji cell consumes the two
+    /// columns it actually occupies — writing per-`char` would shear every
+    /// subsequent column on a screen containing wide glyphs.
+    pub fn write_str(&mut self, x: u16, y: u16, max_x: u16, s: &str, style: Style) {
+        use unicode_width::UnicodeWidthChar;
+        let mut cx = x;
+        for ch in s.chars() {
+            if cx > max_x || cx >= self.w {
+                break;
+            }
+            let w = ch.width().unwrap_or(0) as u16;
+            self.set(cx, y, &ch.to_string(), style);
+            cx += w.max(1);
+        }
+    }
+
     pub fn from_ansi(bytes: &[u8], w: u16, h: u16) -> Grid {
         let mut parser = vt100::Parser::new(h, w, 0);
         // Dumps are line-oriented text, so a bare LF must also return the

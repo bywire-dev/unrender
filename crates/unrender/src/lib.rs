@@ -6,6 +6,7 @@ pub mod emit;
 pub mod grid;
 pub mod rects;
 pub mod regions;
+pub mod render;
 pub mod structure;
 
 use ax::Node;
