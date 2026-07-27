@@ -1,0 +1,30 @@
+[mtop - 11:33:41 up 33 min,  0 user,  load average: 1.17, 0.78, 0.87
+[mTasks:[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  93 [mtotal,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m   2 [mrunning,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  91 [msleeping,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m   0 [mstopped,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m   0 [mzombie
+[m%Cpu(s):[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m 23.8 [mus,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  9.9 [msy,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  0.0 [mni,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m 66.2 [mid,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  0.0 [mwa,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  0.0 [mhi,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  0.0 [msi,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  0.0 [mst
+[mMiB Mem :[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  16075.4 [mtotal,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  12851.8 [mfree,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    817.7 [mused,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m   2727.0 [mbuff/cache
+[mMiB Swap:[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m      0.0 [mtotal,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m      0.0 [mfree,[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m      0.0 [mused.[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  15257.7 [mavail Mem
+
+[39m[49m[29m[28m[7m[25m[25m[22m[24m[22m[23m  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+[m24737 root      20   0  338980  37072  10348 S 119.0   0.2   2:15.48 python3
+[m  566 root      20   0 6013732 432244 188284 S   3.6   2.6   1:50.55 claude
+[m27734 root      20   0 1562472  72376  36944 S   2.4   0.4   0:00.20 zellij
+[m    1 root      20   0   21760   5588   2788 S   1.2   0.0   0:08.92 process_api
+[m    2 root      20   0       0      0      0 S   0.0   0.0   0:00.01 kthreadd
+[m    3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_workqueue_release
+[m    4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-rcu_gp
+[m    5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-sync_wq
+[m    6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-kvfree_rcu_reclaim
+[m    7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-slub_flushwq
+[m    8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-netns
+[m   10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+[m   13 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-mm_percpu_wq
+[m   14 root      20   0       0      0      0 S   0.0   0.0   0:00.05 ksoftirqd/0
+[m   15 root      20   0       0      0      0 I   0.0   0.0   0:00.73 rcu_preempt
+[m   16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_par_gp_kthread_worker+
+[m   17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_gp_kthread_worker
+[m   18 root      rt   0       0      0      0 S   0.0   0.0   0:00.03 migration/0
+[m   19 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+[m   20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1
+[m   21 root      rt   0       0      0      0 S   0.0   0.0   0:00.50 migration/1
+[m   22 root      20   0       0      0      0 S   0.0   0.0   0:00.03 ksoftirqd/1
+[m   23 root      20   0       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0-mm_percpu_wq[m

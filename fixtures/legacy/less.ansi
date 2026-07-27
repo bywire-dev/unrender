@@ -1,0 +1,30 @@
+[m#!/usr/bin/env python3
+[m"""Textual corpus app, instrumented to emit GROUND TRUTH.
+
+[mTextual knows exactly where every widget landed (`widget.region`). We dump that
+[mreal DOM to JSON on a timer, so the inferred accessibility tree can be scored
+[magainst what the framework actually laid out rather than against our own
+[mimpression of the screenshot.
+
+[mKeys: j/k or Down/Up move the DataTable cursor, q quits.
+[m"""
+[mimport json
+[mimport os
+[mimport sys
+
+[mfrom textual.app import App, ComposeResult
+[mfrom textual.containers import Horizontal, Vertical
+[mfrom textual.widgets import DataTable, Footer, Header, Static, Tree
+
+[mTRUTH_PATH = os.environ.get("TRUTH_PATH", "")
+
+[mSERVICES = [
+[m    ("api-gateway", "running", "12ms"),
+[m    ("auth-service", "running", "31ms"),
+[m    ("billing", "degraded", "412ms"),
+[m    ("search-index", "running", "88ms"),
+[m    ("mailer", "stopped", "-"),
+[m    ("scheduler", "running", "5ms"),
+[m]
+
+[m:[m

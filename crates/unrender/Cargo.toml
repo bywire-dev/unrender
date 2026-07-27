@@ -1,0 +1,18 @@
+[package]
+name = "unrender"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+exclude = ["corpus"]
+
+[dependencies]
+vt100 = "0.16"
+unicode-width = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tiktoken-rs = "0.12"
+
+[[bin]]
+name = "unrender"
+path = "src/main.rs"
