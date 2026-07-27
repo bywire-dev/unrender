@@ -15,6 +15,7 @@ structural: recall 100%, role agreement 100%, mean IoU 1.00
 | raw | 12911 | 6002 | 0.31x | 0.09x |
 | plain | 3997 | 549 | 1.00x | 1.00x |
 | compact | 1349 | 707 | 2.96x | 0.78x |
+| nogeo | 934 | 362 | 4.28x | 1.52x |
 | toon | 551 | 233 | 7.25x | 2.36x |
 | json | 8119 | 2253 | 0.49x | 0.24x |
 

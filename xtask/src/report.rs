@@ -25,6 +25,7 @@ struct Encodings {
     raw: String,
     plain: String,
     compact: String,
+    nogeo: String,
     toon: String,
     json: String,
 }
@@ -35,6 +36,8 @@ fn build_encodings(bytes: &[u8]) -> Encodings {
     let plain = strip_ansi(&raw);
     let mut compact = String::new();
     emit::compact(&tree, 0, &mut compact);
+    let mut nogeo = String::new();
+    emit::compact_opt(&tree, 0, false, &mut nogeo);
     let mut toon = String::new();
     emit::toon(&tree, 0, &mut toon);
     let json = serde_json::to_string_pretty(&tree).unwrap();
@@ -42,6 +45,7 @@ fn build_encodings(bytes: &[u8]) -> Encodings {
         raw,
         plain,
         compact,
+        nogeo,
         toon,
         json,
     }
@@ -51,6 +55,7 @@ struct TokenRow {
     raw: Option<usize>,
     plain: Option<usize>,
     compact: Option<usize>,
+    nogeo: Option<usize>,
     toon: Option<usize>,
     json: Option<usize>,
 }
@@ -60,6 +65,7 @@ fn count_all(cache: &mut TokenCache, enc: &Encodings) -> Result<TokenRow> {
         raw: cache.get_or_count(&enc.raw)?,
         plain: cache.get_or_count(&enc.plain)?,
         compact: cache.get_or_count(&enc.compact)?,
+        nogeo: cache.get_or_count(&enc.nogeo)?,
         toon: cache.get_or_count(&enc.toon)?,
         json: cache.get_or_count(&enc.json)?,
     })
@@ -160,23 +166,25 @@ pub fn run(root: &Path) -> Result<()> {
     )?;
     writeln!(
         report,
-        "- **raw / plain / compact / toon / json** -- real Claude token \
-         counts for each encoding of this fixture: the untouched ANSI \
-         capture, ANSI with escape codes stripped, `unrender`'s indented \
-         encoding (with `@x,y,w,h` geometry), TOON-flavored, and JSON. \
-         `raw` and `plain` are the controls `unrender`'s own encodings have \
-         to beat. (A sixth encoding, `nogeo` -- `compact` without \
-         geometry -- isn't in this table; see `BENCHMARK.md` for where it \
-         matters: whether an agent needs coordinates at all.)\n"
+        "- **raw / plain / compact / nogeo / toon / json** -- real Claude \
+         token counts for each encoding of this fixture: the untouched \
+         ANSI capture, ANSI with escape codes stripped, `unrender`'s \
+         indented encoding (with `@x,y,w,h` geometry), the same encoding \
+         with geometry stripped, TOON-flavored, and JSON. `raw` and `plain` \
+         are the controls `unrender`'s own encodings have to beat. `nogeo` \
+         exists to answer a separate question from the others: not \
+         \"is the tree compact\" but \"does an agent even need coordinates\" \
+         -- see `BENCHMARK.md` for the spatial-reasoning ablation that \
+         tests it directly.\n"
     )?;
 
     writeln!(
         report,
-        "| fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | toon | json | cheapest |"
+        "| fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | nogeo | toon | json | cheapest |"
     )?;
     writeln!(
         report,
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"
     )?;
 
     let mut limitations = Vec::new();
@@ -204,7 +212,7 @@ pub fn run(root: &Path) -> Result<()> {
 
         writeln!(
             report,
-            "| [{}](details/{}.md) | {} | {:.0}% | {} | {} | {} | {} | {} | {} | {} | {} | {} |",
+            "| [{}](details/{}.md) | {} | {:.0}% | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} |",
             f.name,
             f.name.replace('/', "-"),
             truth_source,
@@ -219,6 +227,7 @@ pub fn run(root: &Path) -> Result<()> {
             fmt_tok(tok.raw),
             fmt_tok(tok.plain),
             fmt_tok(tok.compact),
+            fmt_tok(tok.nogeo),
             fmt_tok(tok.toon),
             fmt_tok(tok.json),
             cheapest(tok.toon, tok.json),
@@ -346,10 +355,11 @@ fn write_detail(
         "| encoding | bytes | tokens | vs plain (bytes) | vs plain (tokens) |"
     )?;
     writeln!(d, "|---|---:|---:|---:|---:|")?;
-    let rows: [(&str, &str, Option<usize>); 5] = [
+    let rows: [(&str, &str, Option<usize>); 6] = [
         ("raw", &enc.raw, tok.raw),
         ("plain", &enc.plain, tok.plain),
         ("compact", &enc.compact, tok.compact),
+        ("nogeo", &enc.nogeo, tok.nogeo),
         ("toon", &enc.toon, tok.toon),
         ("json", &enc.json, tok.json),
     ];

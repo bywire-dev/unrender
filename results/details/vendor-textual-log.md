@@ -13,6 +13,7 @@ content preservation: **100%** (chrome-excluded; 24 non-blank content cells)
 | raw | 1924 | 844 | 0.49x | 0.03x |
 | plain | 944 | 25 | 1.00x | 1.00x |
 | compact | 244 | 149 | 3.87x | 0.17x |
+| nogeo | 139 | 56 | 6.79x | 0.45x |
 | toon | 77 | 43 | 12.26x | 0.58x |
 | json | 1950 | 547 | 0.48x | 0.05x |
 

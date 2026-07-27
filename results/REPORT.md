@@ -11,30 +11,30 @@ Token counts are real Claude token counts (`claude-opus-5`, via `POST /v1/messag
 - **recall** -- of the nodes in the ground truth, what fraction did `unrender` find at all (IoU ≥ 0.5 against some inferred node)? Only meaningful where `truth` is `framework` or `human`.
 - **role%** -- of the matched nodes, what fraction got the *same role* as ground truth (table vs list vs panel, etc.)? A node can count toward recall by overlapping the right rectangle while still being misclassified -- this catches that.
 - **IoU** (Intersection-over-Union) -- mean overlap ratio between each matched node's inferred rectangle and its ground-truth rectangle (intersection area / union area; 1.00 = pixel-perfect, 0 = no overlap). The geometric half of "did we get the layout right"; role% is the semantic half.
-- **raw / plain / compact / toon / json** -- real Claude token counts for each encoding of this fixture: the untouched ANSI capture, ANSI with escape codes stripped, `unrender`'s indented encoding (with `@x,y,w,h` geometry), TOON-flavored, and JSON. `raw` and `plain` are the controls `unrender`'s own encodings have to beat. (A sixth encoding, `nogeo` -- `compact` without geometry -- isn't in this table; see `BENCHMARK.md` for where it matters: whether an agent needs coordinates at all.)
+- **raw / plain / compact / nogeo / toon / json** -- real Claude token counts for each encoding of this fixture: the untouched ANSI capture, ANSI with escape codes stripped, `unrender`'s indented encoding (with `@x,y,w,h` geometry), the same encoding with geometry stripped, TOON-flavored, and JSON. `raw` and `plain` are the controls `unrender`'s own encodings have to beat. `nogeo` exists to answer a separate question from the others: not "is the tree compact" but "does an agent even need coordinates" -- see `BENCHMARK.md` for the spatial-reasoning ablation that tests it directly.
 
-| fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | toon | json | cheapest |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| [field/bat](details/field-bat.md) | none | 94% | - | - | - | 5286 | 548 | 1500 | 520 | 4688 | toon |
-| [field/btop](details/field-btop.md) | none | 7% | - | - | - | 27768 | 1957 | 1236 | 957 | 2294 | toon |
-| [field/dialog](details/field-dialog.md) | none | 71% | - | - | - | 8000 | 533 | 270 | 84 | 939 | toon |
-| [field/gitui](details/field-gitui.md) | none | 37% | - | - | - | 3532 | 550 | 311 | 228 | 651 | toon |
-| [field/htop](details/field-htop.md) | none | 70% | - | - | - | 6978 | 1166 | 4673 | 1195 | 15073 | toon |
-| [field/lazygit](details/field-lazygit.md) | none | 86% | - | - | - | 2933 | 939 | 3025 | 864 | 9363 | toon |
-| [field/less](details/field-less.md) | none | 76% | - | - | - | 441 | 379 | 849 | 464 | 2236 | toon |
-| [field/man](details/field-man.md) | none | 100% | - | - | - | 97 | 81 | 118 | 94 | 226 | toon |
-| [field/top](details/field-top.md) | none | 71% | - | - | - | 2148 | 1251 | 5039 | 1271 | 16388 | toon |
-| [field/vim](details/field-vim.md) | none | 76% | - | - | - | 438 | 377 | 833 | 456 | 2185 | toon |
-| [legacy/ptk](details/legacy-ptk.md) | none | 47% | - | - | - | 499 | 285 | 549 | 170 | 1990 | toon |
-| [legacy/textual](details/legacy-textual.md) | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 233 | 2253 | toon |
-| [vendor/bubbletea](details/vendor-bubbletea.md) | none | 66% | - | - | - | 1045 | 206 | 495 | 135 | 1682 | toon |
-| [vendor/ink](details/vendor-ink.md) | none | 80% | - | - | - | 563 | 266 | 529 | 159 | 1914 | toon |
-| [vendor/ratatui](details/vendor-ratatui.md) | framework | 70% | 100% | 100% | 1.00 | 848 | 575 | 750 | 232 | 2657 | toon |
-| [vendor/textual/list-view](details/vendor-textual-list-view.md) | none | 0% | - | - | - | 874 | 99 | 65 | 33 | 208 | toon |
-| [vendor/textual/log](details/vendor-textual-log.md) | none | 100% | - | - | - | 844 | 25 | 149 | 43 | 547 | toon |
-| [vendor/textual/progress-bar](details/vendor-textual-progress-bar.md) | none | 0% | - | - | - | 682 | 117 | 73 | 57 | 145 | toon |
-| [vendor/textual/table](details/vendor-textual-table.md) | none | 94% | - | - | - | 10878 | 3074 | 5392 | 2511 | 16071 | toon |
-| [vendor/textual/tree](details/vendor-textual-tree.md) | none | 0% | - | - | - | 2954 | 468 | 384 | 368 | 456 | toon |
+| fixture | truth | fidelity | recall | role% | IoU | raw | plain | compact | nogeo | toon | json | cheapest |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| [field/bat](details/field-bat.md) | none | 94% | - | - | - | 5286 | 548 | 1500 | 762 | 520 | 4688 | toon |
+| [field/btop](details/field-btop.md) | none | 7% | - | - | - | 27768 | 1957 | 1236 | 990 | 957 | 2294 | toon |
+| [field/dialog](details/field-dialog.md) | none | 71% | - | - | - | 8000 | 533 | 270 | 115 | 84 | 939 | toon |
+| [field/gitui](details/field-gitui.md) | none | 37% | - | - | - | 3532 | 550 | 311 | 235 | 228 | 651 | toon |
+| [field/htop](details/field-htop.md) | none | 70% | - | - | - | 6978 | 1166 | 4673 | 2229 | 1195 | 15073 | toon |
+| [field/lazygit](details/field-lazygit.md) | none | 86% | - | - | - | 2933 | 939 | 3025 | 1417 | 864 | 9363 | toon |
+| [field/less](details/field-less.md) | none | 76% | - | - | - | 441 | 379 | 849 | 519 | 464 | 2236 | toon |
+| [field/man](details/field-man.md) | none | 100% | - | - | - | 97 | 81 | 118 | 92 | 94 | 226 | toon |
+| [field/top](details/field-top.md) | none | 71% | - | - | - | 2148 | 1251 | 5039 | 2389 | 1271 | 16388 | toon |
+| [field/vim](details/field-vim.md) | none | 76% | - | - | - | 438 | 377 | 833 | 512 | 456 | 2185 | toon |
+| [legacy/ptk](details/legacy-ptk.md) | none | 47% | - | - | - | 499 | 285 | 549 | 247 | 170 | 1990 | toon |
+| [legacy/textual](details/legacy-textual.md) | framework | 67% | 100% | 100% | 1.00 | 6002 | 549 | 707 | 362 | 233 | 2253 | toon |
+| [vendor/bubbletea](details/vendor-bubbletea.md) | none | 66% | - | - | - | 1045 | 206 | 495 | 217 | 135 | 1682 | toon |
+| [vendor/ink](details/vendor-ink.md) | none | 80% | - | - | - | 563 | 266 | 529 | 237 | 159 | 1914 | toon |
+| [vendor/ratatui](details/vendor-ratatui.md) | framework | 70% | 100% | 100% | 1.00 | 848 | 575 | 750 | 350 | 232 | 2657 | toon |
+| [vendor/textual/list-view](details/vendor-textual-list-view.md) | none | 0% | - | - | - | 874 | 99 | 65 | 30 | 33 | 208 | toon |
+| [vendor/textual/log](details/vendor-textual-log.md) | none | 100% | - | - | - | 844 | 25 | 149 | 56 | 43 | 547 | toon |
+| [vendor/textual/progress-bar](details/vendor-textual-progress-bar.md) | none | 0% | - | - | - | 682 | 117 | 73 | 56 | 57 | 145 | toon |
+| [vendor/textual/table](details/vendor-textual-table.md) | none | 94% | - | - | - | 10878 | 3074 | 5392 | 3232 | 2511 | 16071 | toon |
+| [vendor/textual/tree](details/vendor-textual-tree.md) | none | 0% | - | - | - | 2954 | 468 | 384 | 367 | 368 | 456 | toon |
 
 ## Known limitations
 
